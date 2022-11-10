@@ -1,5 +1,4 @@
-package com.example.customerservice.entities;
-
+package com.example.inventoryservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,13 +12,14 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Customer {
+class  Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
+    private double price;
+    private double quantity;
 }

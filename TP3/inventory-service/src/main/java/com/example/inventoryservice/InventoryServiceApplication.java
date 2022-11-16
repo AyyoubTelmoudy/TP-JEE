@@ -4,6 +4,8 @@ package com.example.inventoryservice;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 
 @SpringBootApplication
@@ -13,7 +15,10 @@ public class InventoryServiceApplication {
 		SpringApplication.run(InventoryServiceApplication.class, args);
 	}
 
-	CommandLineRunner start(ProductRepository repository){
+
+	@Bean
+	CommandLineRunner start(ProductRepository repository, RepositoryRestConfiguration configuration){
+		configuration.exposeIdsFor(Product.class);
 		return args -> {
    repository.save(new Product(null,"Ordinatuer",788,12));
    repository.save(new Product(null,"Imprimante",788,12));

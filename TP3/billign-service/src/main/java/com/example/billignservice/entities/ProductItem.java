@@ -1,6 +1,7 @@
 package com.example.billignservice.entities;
 
 import com.example.billignservice.model.Product;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,9 @@ public class ProductItem {
     private double quantity;
     private double price;
     private long productID;
+    @Transient
+    private String productName;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Bill bill;
     @Transient

@@ -19,6 +19,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Random;
@@ -32,13 +34,17 @@ public class BillingServiceApplication {
     }
 
     @Bean
-    CommandLineRunner start(BillRepository billRepository, ProductItemRepository itemRepository, CustomerRestClient customerRestClient, ProductItemRestClient productItemRestClient)
+    CommandLineRunner start(HttpServletRequest request,BillRepository billRepository, ProductItemRepository itemRepository, CustomerRestClient customerRestClient, ProductItemRestClient productItemRestClient)
     {
         return  args -> {
-            String token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJOMnBIcm9FQlJqeWUtczBDekdTUVlqOWdwVlMyTjhvV0ZkeWhESVNIS0hvIn0.eyJleHAiOjE2NzA0NjIzODksImlhdCI6MTY3MDQ2MjA4OSwianRpIjoiMWQ2ZmMxZDEtMTg1MC00Mjg4LTkyNDUtNzIzZjNkOTNkYzc2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9teXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjZkMzFkZGI0LWEwOGYtNGI5Yy05OTJkLWY1YjI4MjkxOTFhNiIsInR5cCI6IkJlYXJlciIsImF6cCI6InByb2R1Y3RzLWFwcCIsInNlc3Npb25fc3RhdGUiOiJkZDBiY2RjZC1kZGQ2LTRmNDMtYjYyNS0yMDVmNWE5ZmEzM2UiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1teXJlYWxtIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlVTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJkZDBiY2RjZC1kZGQ2LTRmNDMtYjYyNS0yMDVmNWE5ZmEzM2UiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJoYXNzYW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyMSIsImdpdmVuX25hbWUiOiJoYXNzYW4iLCJmYW1pbHlfbmFtZSI6IiIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIn0.AvOrEGPPqS2IVBd4yvTK_zshglhTqSutdOVuuQSHFFwpJooY7Zp4T88b2vL78P-IK0rLeB4gZG85tnewOBd_wSsAtqOtJX6-2mxXNnJUHE4CL6C4vLWqssRFlxg1IqO2lxyx0BFYKNt6BF6K9YHPQM2mOHIJAovsXLqizCYolngpebh-9iJH4E-XAOEFtBPJVVLbBRkPhuTuTQsUpftr9TNsl4pa8xc17d-vvc6G4kxuLo9xTt4TxziPOnUqsxvEyrd6lPhLt5hn-wC-UyXVemRCMCywNM7grS2C0VEYolXm2UO3l-qc6k5_1QBKGhUwgURZEDYgIo3KVrKQfUjF5w";
-            Customer customer=customerRestClient.getCustomerById(1L,"Bearer "+token);
+            //KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
+            //KeycloakPrincipal principal=(KeycloakPrincipal)token.getPrincipal();
+           // KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
+            String tokenString = "";//session.getTokenString();
+            tokenString=tokenString!=null?tokenString:"";
+            Customer customer=customerRestClient.getCustomerById(1L,"Bearer "+tokenString);
            Bill bill= billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
-            PagedModel<Product> products=productItemRestClient.pageProducts("Bearer "+token);
+            PagedModel<Product> products=productItemRestClient.pageProducts("Bearer "+tokenString);
             products.forEach(product -> {
                 ProductItem productItem=new ProductItem();
                 productItem.setPrice(product.getPrice());
@@ -49,5 +55,8 @@ public class BillingServiceApplication {
             });
         };
     }
+
+
+
 
 }

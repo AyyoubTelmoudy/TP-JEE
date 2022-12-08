@@ -42,9 +42,9 @@ public class BillingServiceApplication {
            // KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
             String tokenString = "";//session.getTokenString();
             tokenString=tokenString!=null?tokenString:"";
-            Customer customer=customerRestClient.getCustomerById(1L,"Bearer "+tokenString);
+            Customer customer=customerRestClient.getCustomerById(1L);
            Bill bill= billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
-            PagedModel<Product> products=productItemRestClient.pageProducts("Bearer "+tokenString);
+            PagedModel<Product> products=productItemRestClient.pageProducts();
             products.forEach(product -> {
                 ProductItem productItem=new ProductItem();
                 productItem.setPrice(product.getPrice());

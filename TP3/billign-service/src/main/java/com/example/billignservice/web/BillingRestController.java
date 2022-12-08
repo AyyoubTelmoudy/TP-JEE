@@ -45,10 +45,10 @@ public class BillingRestController {
     {
 
         Bill bill=billRepository.findById(id).get();
-        Customer customer=customerRestClient.getCustomerById(bill.getCustomerID(),"Bearer "+getToken());
+        Customer customer=customerRestClient.getCustomerById(bill.getCustomerID());
         bill.setCustomer(customer);
         bill.getProductItems().forEach(p->{
-            Product product=productItemRestClient.getProductById(p.getProductID(),"Bearer "+getToken());
+            Product product=productItemRestClient.getProductById(p.getProductID());
             //p.setProduct(product);
             p.setProductName(product.getName());
         });
@@ -61,10 +61,10 @@ public class BillingRestController {
         List<Bill> bills=billRepository.findAll();
         List<Bill> bills2=new ArrayList<Bill>();
         for (Bill bill: bills) {
-            Customer customer=customerRestClient.getCustomerById(bill.getCustomerID(),"Bearer "+getToken());
+            Customer customer=customerRestClient.getCustomerById(bill.getCustomerID());
             bill.setCustomer(customer);
             bill.getProductItems().forEach(p->{
-                Product product=productItemRestClient.getProductById(p.getProductID(),"Bearer "+getToken());
+                Product product=productItemRestClient.getProductById(p.getProductID());
                 //p.setProduct(product);
                 p.setProductName(product.getName());
             });

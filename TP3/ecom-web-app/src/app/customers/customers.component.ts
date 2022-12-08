@@ -12,6 +12,12 @@ export class CustomersComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
+   getOrders(c:any)
+  {
+
+  }
+
+
   ngOnInit(): void {
     this.http.get("http://localhost:8888/CUSTOMER-SERVICE/customers").subscribe(
       {

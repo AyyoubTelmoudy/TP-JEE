@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ProductItemRestClient {
 
     @GetMapping(path = "/products")
-    PagedModel<Product> pageProducts(@RequestHeader("Authorization") String header);
+    PagedModel<Product> pageProducts();
 
     @GetMapping(path = "/products/{id}")
-    Product getProductById(@PathVariable Long id,@RequestHeader("Authorization") String header);
+    Product getProductById(@PathVariable Long id);
 }

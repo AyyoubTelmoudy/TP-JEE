@@ -37,22 +37,19 @@ public class BillingServiceApplication {
     CommandLineRunner start(HttpServletRequest request,BillRepository billRepository, ProductItemRepository itemRepository, CustomerRestClient customerRestClient, ProductItemRestClient productItemRestClient)
     {
         return  args -> {
-            //KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
-            //KeycloakPrincipal principal=(KeycloakPrincipal)token.getPrincipal();
-           // KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
-            String tokenString = "";//session.getTokenString();
-            tokenString=tokenString!=null?tokenString:"";
-            Customer customer=customerRestClient.getCustomerById(1L);
-           Bill bill= billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
-            PagedModel<Product> products=productItemRestClient.pageProducts();
-            products.forEach(product -> {
-                ProductItem productItem=new ProductItem();
-                productItem.setPrice(product.getPrice());
-                productItem.setQuantity(1+ new Random().nextInt(100));
-                productItem.setProductID(product.getId());
-                productItem.setBill(bill);
-                itemRepository.save(productItem);
-            });
+            for (Customer customer:customerRestClient.getCustomers())
+            {
+                Bill bill= billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
+                PagedModel<Product> products=productItemRestClient.pageProducts();
+                products.forEach(product -> {
+                    ProductItem productItem=new ProductItem();
+                    productItem.setPrice(product.getPrice());
+                    productItem.setQuantity(1+ new Random().nextInt(100));
+                    productItem.setProductID(product.getId());
+                    productItem.setBill(bill);
+                    itemRepository.save(productItem);
+                });
+            }
         };
     }
 

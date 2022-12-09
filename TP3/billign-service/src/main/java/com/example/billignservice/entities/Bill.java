@@ -25,5 +25,13 @@ public class Bill {
     private Long customerID;
     @Transient
     private Customer customer;
+    public double getTotal()
+    {
+        double some=0;
+        for (ProductItem item:productItems)
+        { some=some+item.getAmount();
+        }
+       return some;
+    }
 
 }

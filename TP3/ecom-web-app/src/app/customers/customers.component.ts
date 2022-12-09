@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -10,11 +11,11 @@ export class CustomersComponent implements OnInit {
 
   customers:any
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
    getOrders(c:any)
   {
-
+    this.router.navigateByUrl("/orders/"+c.id)
   }
 
 

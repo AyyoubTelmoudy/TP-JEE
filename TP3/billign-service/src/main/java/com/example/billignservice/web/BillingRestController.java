@@ -55,6 +55,13 @@ public class BillingRestController {
         return  bill;
     }
 
+    @GetMapping(path = "/fullBill/search/{customerId}")
+    public List<Bill> getBillsByCustomer(@PathVariable Long customerId)
+    {
+        List<Bill> bills=billRepository.findByCustomerID(customerId);
+        return  bills;
+    }
+
     @GetMapping(path = "/fullBill")
     public List<Bill> getAllBills(@PathVariable Long id)
     {

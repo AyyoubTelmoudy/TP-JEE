@@ -24,11 +24,11 @@ Groupe : G3 / 32
 
   le microservice customer-service à travers la gateway 
 
-    ![CHEESE!](TP3/steps/customers_microservice._gateway.PNG)
+    ![CHEESE!](TP3/steps/customersgateway.PNG)
 
   le microservice inverntory-service à travers la gateway
 
-    ![CHEESE!](TP3/steps/products_microservice microservice.PNG)
+    ![CHEESE!](TP3/steps/productsgateway.PNG)
 
  4) l'annuaire Eureka Discrovery Service :
 

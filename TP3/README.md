@@ -1,10 +1,7 @@
 
 # Contrôle           
 # Matière : JEE 
-Nom complet : Ayyoub TELMOUDY
-Nom complet : Ayyoub TELMOUDY
-Filière : IIR Niveau : 5 
-Groupe : G3 / 32
+Nom complet : Ayyoub TELMOUDY -- Filière : IIR -- Niveau : 5 -- Groupe : G3 / 32
 
 1) customer-service:
  Dans cet etap on crée un microservice qui va gérer les clients et on lui envoie des requêtes http à travers son adresse :
@@ -24,11 +21,11 @@ Groupe : G3 / 32
 
   le microservice customer-service à travers la gateway 
 
-    ![CHEESE!](steps/1.PNG)
+    ![CHEESE!](steps/gateway2.PNG)
 
   le microservice inverntory-service à travers la gateway
 
-    ![CHEESE!](steps/2.PNG)
+    ![CHEESE!](steps/gateway1.PNG)
 
  4) l'annuaire Eureka Discrovery Service :
 
@@ -114,18 +111,22 @@ keycloak adapter
 frontend angular
 installation de la library keycloak-js et keycloak-angular et configuration de keycloak adapter
 
- ![CHEESE!](steps/keycloak1.PNG.PNG)
+![CHEESE!](steps/keycloak1.PNG)
 
  
-![CHEESE!](steps/keycloak2.PNG.PNG)
+![CHEESE!](steps/keycloak2.PNG)
  
  Utilisateur not connecté
  
-  ![CHEESE!](steps/not authenticated.PNG)
+  ![CHEESE!](steps/notauth.PNG)
 
   Utilisateur connecté
  
-  ![CHEESE!](steps/authenticated_angular.PNG)
+ ![CHEESE!](steps/authenticated_angular.PNG)
+ 
+  Formulaire d'authentification
+ 
+ ![CHEESE!](steps/redirection.PNG)
  
  
  

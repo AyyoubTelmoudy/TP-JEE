@@ -10,6 +10,12 @@
           <a class="nav-link active" aria-current="page" routerLink="/customers">Customers</a>
         </li>
       </ul>
+       <div class="d-flex align-items-center">
+           <button class="btn btn-info m-1" *ngIf="securityService.kc.authenticated" (click)="onLogout()"  >Logout</button>
+           <button class="btn btn-info m-1" *ngIf="!securityService.kc.authenticated" (click)="onLogin()">Login</button>
+           <button class="btn btn-info m-1" *ngIf="securityService.kc.authenticated" (click)="toAccount()">Account</button>
+           <span  *ngIf="securityService.kc.authenticated">{{securityService.kc.tokenParsed!.email}}</span>
+       </div>
     </div>
   </div>
 </nav>

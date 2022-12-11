@@ -1,5 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { KeycloakSecurityService } from '../services/keycloak-security.service';
 
 @Component({
   selector: 'app-product',
@@ -9,10 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class ProductComponent implements OnInit {
   products:any
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private securityService:KeycloakSecurityService) { }
 
   ngOnInit(): void {
-    this.http.get("http://localhost:8888/PRODUCTS-SERVICE/products").subscribe(
+    var token=this.securityService.kc.token;
+    this.http.get("http://localhost:8888/PRODUCTS-SERVICE/products",{headers:{"Authorization":"Bearer "+token}}).subscribe(
       {
         next:(data)=>{
         this.products=data;

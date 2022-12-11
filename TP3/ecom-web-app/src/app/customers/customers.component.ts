@@ -1,6 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { KeycloakSecurityService } from '../services/keycloak-security.service';
 
 @Component({
   selector: 'app-customers',
@@ -11,7 +13,7 @@ export class CustomersComponent implements OnInit {
 
   customers:any
 
-  constructor(private http:HttpClient,private router:Router) { }
+  constructor(private http:HttpClient,private router:Router,private securityService:KeycloakSecurityService) { }
 
    getOrders(c:any)
   {
@@ -20,7 +22,8 @@ export class CustomersComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.http.get("http://localhost:8888/CUSTOMER-SERVICE/customers").subscribe(
+    var token=this.securityService.kc.token;
+    this.http.get("http://localhost:8888/CUSTOMER-SERVICE/customers",{headers:new HttpHeaders({"Authorization":"Bearer "+token})}).subscribe(
       {
         next:(data)=>{
         this.customers=data;

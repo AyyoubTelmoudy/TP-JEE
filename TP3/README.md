@@ -21,11 +21,11 @@ Nom complet : Ayyoub TELMOUDY -- Filière : IIR -- Niveau : 5 -- Groupe : G3 / 3
 
   le microservice customer-service à travers la gateway 
 
-    ![CHEESE!](steps/gateway2.PNG)
+   ![CHEESE!](steps/gateway1.PNG)
 
   le microservice inverntory-service à travers la gateway
 
-    ![CHEESE!](steps/gateway1.PNG)
+   ![CHEESE!](steps/gateway2.PNG)
 
  4) l'annuaire Eureka Discrovery Service :
 
